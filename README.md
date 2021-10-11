@@ -35,3 +35,27 @@ Step 5: create private route
 Step-6: Redirect after login
 1. after login redirect user to their desired destination
 */
+
+
+const PrivateRoute = ({children, ...rest }) => {
+ 
+ const {user} = useAuth();
+    return (
+      <Route
+     {...rest}
+     render={({location}) => user?.displayName ? (children) : (<Redirect
+     to={{
+         pathname:"/login",
+         state: { from: location }
+     }}
+     >
+
+     </Redirect>)}
+   
+
+    ></Route>
+          
+    );
+};
+
+export default PrivateRoute;
